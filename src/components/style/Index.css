@@ -8,11 +8,11 @@
     background-color: #03423f;
     height: 59px;
     line-height: 59px;
-    
+
 
 }
 
-.container-logo{
+.container-logo {
     padding: 0;
     display: block;
     width: auto;
@@ -20,12 +20,12 @@
     max-height: 100%;
     image-rendering: auto;
     position: relative;
-    z-index: 2;   
+    z-index: 2;
     -webkit-transition: opacity 0.4s ease-in-out;
     transition: opacity 0.4s ease-in-out;
 }
 
-.container-titulo{
+.container-titulo {
     color: #03423f;
     font-size: 43px;
     font-weight: bold;
@@ -37,10 +37,46 @@
     text-align: center
 }
 
-.container-header{
+.container-header {
     margin-top: 100px;
 }
 
-.container-body{
+.container-body {
     margin: 25px;
+}
+
+.btn-success {
+    align-items: center;
+    color: #fff;
+    background-color: #198754;
+    border-color: #198754;
+    margin: 15px;
+    margin-left: 109px;
+    width: 290px;
+
+}
+
+.dias_1 {
+
+    color: white;
+    background-color: #B8FF33;
+    font-family: arial;
+    font-weight: bolder;
+    font-size: .9rem;
+}
+
+.dias_3 {
+    color: white;
+    background-color: #FFF933;
+    font-family: arial;
+    font-weight: bolder;
+    font-size: .9rem;
+
+
+
+
+}
+
+.dias_5 {
+    color: #FF5233;
 }

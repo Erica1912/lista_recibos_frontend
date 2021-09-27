@@ -5,12 +5,10 @@ import logo from "../components/img/logo.png";
 import { Table, Form, Button } from "react-bootstrap";
 import moment from "moment";
 
-
 const Recibo = () => {
   const { id } = useParams();
   const [datos, setDatos] = React.useState({});
 
-  console.log(datos);
   React.useEffect(() => {
     const obtenerDatos = async () => {
       const data = await fetch(`http://localhost:3001/recibo/${id}`);
@@ -19,15 +17,20 @@ const Recibo = () => {
     };
     obtenerDatos();
   }, [id]);
- 
-    const fecCrea =  moment(datos.FECHA_CREADO).format('YYYY-MM-DD');    
-    const given = moment(fecCrea, "YYYY-MM-DD");
-    const current = moment().startOf('day');
-    
-    //Difference in number of days
-   console.log( moment.duration(current.diff(given)).asDays())
-   console.log(fecCrea, given, 'hola')
-   
+  let colorESt;
+
+  if (datos.ESTADO === "Compra") {
+    if (datos.DIAS === 1) {
+      colorESt ='dias_1'
+    } else if (datos.DIAS >= 2 || datos.DIAS <= 3 ) {
+      colorESt ='dias_3'
+    }
+    else if (datos.DIAS === 5) {
+      colorESt ='dias_5'
+    }
+  } else {
+    console.log(datos.ESTADO);
+  }
 
   return (
     <div className="container">
@@ -45,15 +48,15 @@ const Recibo = () => {
           </thead>
           <tbody>
             <tr>
-              <td>{datos.CONSECUTIVOS}</td>
-              <td>{datos.ESTADO}</td>
+              <td >{datos.CONSECUTIVOS}</td>
+              <td className= {colorESt}><mark className= {colorESt} >{datos.ESTADO} - {datos.DIAS} </mark></td>
             </tr>
           </tbody>
         </Table>
       </div>
       <div className="container-body">
         <Form>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Group className="mb-3">
             <Form.Label>Titular</Form.Label>
             <Form.Control
               type="email"
@@ -61,7 +64,7 @@ const Recibo = () => {
               value={datos.TITULAR}
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Group className="mb-3">
             <Form.Label>Peso</Form.Label>
             <Form.Control
               type="email"
@@ -69,15 +72,15 @@ const Recibo = () => {
               value={datos.PESO}
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Group className="mb-3">
             <Form.Label>Fecha Creado</Form.Label>
             <Form.Control
               type="email"
-              placeholder={datos.FECHA_CREADO}
-              value={datos.FECHA_CREADO}
+              placeholder={moment(datos.FECHA_CREADO).format("YYYY-MM-DD")}
+              value={moment(datos.FECHA_CREADO).format("YYYY-MM-DD")}
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Group className="mb-3">
             <Form.Label>Precio</Form.Label>
             <Form.Control
               type="email"
@@ -85,7 +88,7 @@ const Recibo = () => {
               value={datos.PRECIO}
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Group className="mb-3">
             <Form.Label>Precio unidad(kg)</Form.Label>
             <Form.Control
               type="email"
@@ -93,7 +96,7 @@ const Recibo = () => {
               value={datos.PRECIO_U}
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Group className="mb-3">
             <Form.Label>Creado por</Form.Label>
             <Form.Control
               type="email"
@@ -101,7 +104,7 @@ const Recibo = () => {
               value={datos.NOMBRE_USUARIO}
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Group className="mb-3">
             <Form.Label>Dirección</Form.Label>
             <Form.Control
               type="email"
@@ -110,11 +113,11 @@ const Recibo = () => {
             />
           </Form.Group>
 
-          <Button variant="success" type="Guardar">
-            Submit
+          <Button variant="success" type="submit" className="form-button">
+            Editar
           </Button>
-          <Button variant="success" type="Eliminar">
-            Submit
+          <Button variant="success" type="submit">
+            Eliminar
           </Button>
         </Form>
       </div>
