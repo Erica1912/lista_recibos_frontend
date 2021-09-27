@@ -1,16 +1,18 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Index from "./components/Index";
+import Recibo from "./components/Recibo";
 
 function App() {
   return (
     <Router>
-      <Switch>
-        <div className="Container">
-          <Route path="/" exact>
-          <Index />
+      <Switch>        
+          <Route path="/recibo/:id">
+            <Recibo />
           </Route>
-        </div>
+          <Route path="/" exact>
+            <Index />
+          </Route>        
       </Switch>
     </Router>
   );
